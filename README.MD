@@ -1,8 +1,5 @@
 # Model Zoo Benchmarking Pipeline
-TODO
-create a good drescription
-create a better explanation
-create a requirements file
+
 Automated pipeline to download models from Hugging Face, export them to ONNX,
 and benchmark **latency, throughput, and accuracy** across CPU and GPU backends.
 
