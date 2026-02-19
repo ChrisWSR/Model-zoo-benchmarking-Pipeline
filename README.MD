@@ -45,16 +45,20 @@ model-zoo-benchmark/
 
 > 🟢 < 10ms &nbsp;&nbsp; 🟡 10–50ms &nbsp;&nbsp; 🔴 > 50ms
 
-| Model           | Backend    | Latency (ms)    | p95 (ms) | Throughput (s/s) | Size (MB) |
-|-----------------|------------|-----------------|----------|------------------|-----------|
-| efficientnet_b0 | onnx_cpu   | 🟡 18.3         | 20.1     | 54.6             | 20.1      |
-| efficientnet_b0 | pytorch    | 🟡 32.7         | 35.2     | 30.6             | —         |
-| mobilenet_v2    | onnx_cpu   | 🟢 9.4          | 10.2     | 106.4            | 13.6      |
-| mobilenet_v2    | pytorch    | 🟡 18.1         | 19.8     | 55.2             | —         |
-| resnet18        | onnx_cpu   | 🟢 7.2          | 8.1      | 138.9            | 44.7      |
-| resnet18        | pytorch    | 🟡 14.8         | 16.3     | 67.6             | —         |
-| resnet50        | onnx_cpu   | 🟡 22.6         | 24.9     | 44.2             | 97.8      |
-| resnet50        | pytorch    | 🟡 43.1         | 46.2     | 23.2             | —         |
+| Model           | Backend   | Latency (ms)   |   p95 (ms) |   Throughput (s/s) | Size (MB)   |
+|:----------------|:----------|:---------------|-----------:|-------------------:|:------------|
+| efficientnet_b0 | onnx_cpu  | 🟢 6.6         |        7.4 |              151.4 | 21.2        |
+| efficientnet_b0 | onnx_gpu  | 🟢 2.1         |        2.2 |              483.2 | 21.2        |
+| efficientnet_b0 | pytorch   | 🟢 3.6         |        5   |              278.7 | —           |
+| mobilenet_v2    | onnx_cpu  | 🟢 2.5         |        2.8 |              400.8 | 14.2        |
+| mobilenet_v2    | onnx_gpu  | 🟢 1.5         |        1.9 |              660.4 | 14.2        |
+| mobilenet_v2    | pytorch   | 🟢 3.2         |        4   |              312.7 | —           |
+| resnet18        | onnx_cpu  | 🟢 9.0         |       10.4 |              111.1 | 46.8        |
+| resnet18        | onnx_gpu  | 🟢 2.2         |        2.7 |              447   | 46.8        |
+| resnet18        | pytorch   | 🟢 2.3         |        2.9 |              435.2 | —           |
+| resnet50        | onnx_cpu  | 🟡 21.1        |       22.3 |               47.3 | 102.2       |
+| resnet50        | onnx_gpu  | 🟢 5.1         |        5.7 |              196.3 | 102.2       |
+| resnet50        | pytorch   | 🟢 4.9         |        5.3 |              206   | —           |
 
 *ONNX Runtime delivers **1.7–2.4× lower latency** vs PyTorch on CPU across all tested models.*
 
