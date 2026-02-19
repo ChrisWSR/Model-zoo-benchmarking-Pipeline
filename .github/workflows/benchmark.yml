@@ -1,0 +1,45 @@
+name: Model Zoo Benchmark CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 6 * * 1"   # Weekly Monday 6am — catch regressions early
+
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run benchmark (CPU smoke test)
+        run: |
+          python src/benchmark.py \
+            --models resnet18 \
+            --batch-sizes 1 4 \
+            --output-dir results
+
+      - name: Generate report
+        run: python src/report_generator.py --results-dir results --output RESULTS.md
+
+      - name: Upload results artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: benchmark-results-${{ github.sha }}
+          path: results/
+
+      - name: Check for latency regressions
+        run: python tests/test_regression.py --threshold-ms 200
